@@ -1,7 +1,7 @@
 /**
  * Created by Lee on 3/9/16.
  */
-import {service} from './jfwservice'
+import service from './jfwservice'
 export default class DBHelper {
     constructor(dbName) {
         this.dbName = dbName

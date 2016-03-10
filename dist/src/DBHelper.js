@@ -11,6 +11,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _jfwservice = require("./jfwservice");
 
+var _jfwservice2 = _interopRequireDefault(_jfwservice);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var DBHelper = function () {
@@ -130,7 +134,7 @@ var DBHelper = function () {
             var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
             var method = arguments[1];
 
-            return (0, _jfwservice.service)("DBProxy", method, this.buildParam(option));
+            return (0, _jfwservice2.default)("DBProxy", method, this.buildParam(option));
         }
     }, {
         key: "buildParam",
