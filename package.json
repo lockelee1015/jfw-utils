@@ -1,0 +1,22 @@
+{
+  "name": "jfw-utils",
+  "version": "1.0.0",
+  "description": "all the utils in our project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lockelee1015/jfw-utils.git"
+  },
+  "keywords": [
+    "jfw"
+  ],
+  "author": "lockelee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lockelee1015/jfw-utils/issues"
+  },
+  "homepage": "https://github.com/lockelee1015/jfw-utils#readme"
+}
