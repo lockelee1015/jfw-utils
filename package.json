@@ -2,7 +2,7 @@
   "name": "jfw-utils",
   "version": "1.0.0",
   "description": "all the utils in our project",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
