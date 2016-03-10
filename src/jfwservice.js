@@ -33,8 +33,6 @@ const ajaxService = function (url, param, callback, failCallback) {
  * @param param
  * @returns {Promise}
  */
-export function service (serviceId,method,param){
+export default function service (serviceId,method,param){
     return new Promise((resolve,reject)=>JfwServer.service(serviceId,method,param,resolve,reject))
 }
-
-export default JfwService

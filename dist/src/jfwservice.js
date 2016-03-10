@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.service = service;
+exports.default = service;
 
 var _jquery = require("jquery");
 
@@ -48,5 +48,3 @@ function service(serviceId, method, param) {
         return JfwServer.service(serviceId, method, param, resolve, reject);
     });
 }
-
-exports.default = JfwService;
