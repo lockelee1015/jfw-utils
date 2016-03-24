@@ -1,5 +1,9 @@
 'use strict';
 import $ from "jquery";
+let _$ = $
+if(window.$){
+    _$=window.$
+}
 
 const JfwServer = {
     service: function (serviceId, method, param, callback, failCallback) {
@@ -13,7 +17,7 @@ const JfwServer = {
 
 const ajaxService = function (url, param, callback, failCallback) {
     let _param = JSON.stringify(param);
-    $.ajax({
+    _$.ajax({
             url: url,
             type: 'POST',
             dataType: 'json',

@@ -11,6 +11,11 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _$ = _jquery2.default;
+if (window.$) {
+    _$ = window.$;
+}
+
 var JfwServer = {
     service: function service(serviceId, method, param, callback, failCallback) {
         var url = "jfwservice.do?";
@@ -23,7 +28,7 @@ var JfwServer = {
 
 var ajaxService = function ajaxService(url, param, callback, failCallback) {
     var _param = JSON.stringify(param);
-    _jquery2.default.ajax({
+    _$.ajax({
         url: url,
         type: 'POST',
         dataType: 'json',
