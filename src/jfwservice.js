@@ -1,10 +1,6 @@
 'use strict';
-import $ from "jquery";
-let _$ = $
-if(window.$){
-    _$=window.$
-}
-
+import './jquery'
+const $ = window.$
 const JfwServer = {
     service: function (serviceId, method, param, callback, failCallback) {
         let url = "jfwservice.do?";
