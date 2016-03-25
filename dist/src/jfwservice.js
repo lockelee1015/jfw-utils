@@ -5,17 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = service;
 
-var _jquery = require("jquery");
+require('./jquery');
 
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _$ = _jquery2.default;
-if (window.$) {
-    _$ = window.$;
-}
-
+var $ = window.$;
 var JfwServer = {
     service: function service(serviceId, method, param, callback, failCallback) {
         var url = "jfwservice.do?";
@@ -28,7 +20,7 @@ var JfwServer = {
 
 var ajaxService = function ajaxService(url, param, callback, failCallback) {
     var _param = JSON.stringify(param);
-    _$.ajax({
+    $.ajax({
         url: url,
         type: 'POST',
         dataType: 'json',
@@ -36,8 +28,22 @@ var ajaxService = function ajaxService(url, param, callback, failCallback) {
     }).done(function (e) {
         return callback(e);
     }).fail(function (e) {
-        console.log("数据获取失败:" + url);
+        console.log('数据获取失败:' + url);
         failCallback ? failCallback(e) : void 0;
+    });
+};
+
+var fetchService = function fetchService(url, param) {
+    var _param = 'data=' + JSON.stringify(param);
+    console.log(_param);
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: _param
+    }).then(function (e) {
+        return e.json();
     });
 };
 
@@ -49,7 +55,14 @@ var ajaxService = function ajaxService(url, param, callback, failCallback) {
  * @returns {Promise}
  */
 function service(serviceId, method, param) {
-    return new Promise(function (resolve, reject) {
-        return JfwServer.service(serviceId, method, param, resolve, reject);
-    });
+    if (navigator.appName == "Microsoft Internet Explorer") {
+        var url = "jfwservice.do?";
+        url += "serviceId=" + serviceId;
+        url += "&method=" + method;
+        return fetchService(url, param);
+    } else {
+        return new Promise(function (resolve, reject) {
+            return JfwServer.service(serviceId, method, param, resolve, reject);
+        });
+    }
 }

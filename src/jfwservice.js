@@ -13,7 +13,7 @@ const JfwServer = {
 
 const ajaxService = function (url, param, callback, failCallback) {
     let _param = JSON.stringify(param);
-    _$.ajax({
+    $.ajax({
             url: url,
             type: 'POST',
             dataType: 'json',
@@ -26,6 +26,20 @@ const ajaxService = function (url, param, callback, failCallback) {
         })
 }
 
+const fetchService = function fetchService(url, param) {
+    var _param = 'data='+JSON.stringify(param);
+    console.log(_param)
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: _param
+    }).then(function (e) {
+        return e.json();
+    });
+};
+
 /**
  * 返回一个promise对象
  * @param serviceId
@@ -34,5 +48,14 @@ const ajaxService = function (url, param, callback, failCallback) {
  * @returns {Promise}
  */
 export default function service (serviceId,method,param){
-    return new Promise((resolve,reject)=>JfwServer.service(serviceId,method,param,resolve,reject))
+    if(navigator.appName == "Microsoft Internet Explorer"){
+        var url = "jfwservice.do?"
+            url += "serviceId=" + serviceId
+            url += "&method=" + method
+        return fetchService(url,param)
+    }else{
+        return new Promise(function (resolve, reject) {
+            return JfwServer.service(serviceId, method, param, resolve, reject);
+        })
+    }
 }
