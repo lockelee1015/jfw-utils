@@ -49,7 +49,7 @@ Array.prototype.sortById = function () {
                 sortResult = a[sortBy] > b[sortBy];
             }
             if (!ordAlpha) sortResult = !sortResult;
-            return sortResult;
+            return sortResult?1:-1;
         }
 
         return sort;
