@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.jfwservice = exports.DBHelper = exports.DateAddons = exports.ArrayAddons = undefined;
 
 var _ArrayAddons = require('./src/ArrayAddons');
 
@@ -22,4 +23,7 @@ var _jfwservice2 = _interopRequireDefault(_jfwservice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = { ArrayAddons: _ArrayAddons2.default, DateAddons: _DateAddons2.default, DBHelper: _DBHelper2.default, jfwservice: _jfwservice2.default };
+exports.ArrayAddons = _ArrayAddons2.default;
+exports.DateAddons = _DateAddons2.default;
+exports.DBHelper = _DBHelper2.default;
+exports.jfwservice = _jfwservice2.default;

@@ -3,4 +3,4 @@ import DateAddons from './src/DateAddons'
 import DBHelper from './src/DBHelper'
 import jfwservice from './src/jfwservice'
 
-export default {ArrayAddons, DateAddons, DBHelper, jfwservice}
+export {ArrayAddons, DateAddons, DBHelper, jfwservice}
