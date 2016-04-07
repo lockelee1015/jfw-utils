@@ -45,13 +45,20 @@ Array.prototype.sortById = function () {
             var sortResult;
             if (typeof a[sortBy] == 'string') {
                 sortResult = a[sortBy].localeCompare(b[sortBy]);
+                if (!ordAlpha && sortResult != 0) {
+                    sortResult = -sortResult;
+                }
             } else if (typeof a[sortBy] == 'number') {
-                sortResult = a[sortBy] > b[sortBy];
+                if (a[sortBy] === b[sortBy]) {
+                    sortResult = 0;
+                } else {
+                    sortResult = a[sortBy] > b[sortBy];
+                    if (!ordAlpha) sortResult = !sortResult;
+                    sortResult = sortResult ? 1 : -1;
+                }
             }
-            if (!ordAlpha) sortResult = !sortResult;
-            return sortResult ? 1 : -1;
+            return sortResult;
         }
-
         return sort;
     };
     return this.sort(getSort(order, idName));
