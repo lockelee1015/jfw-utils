@@ -109,16 +109,15 @@ Array.prototype.takeById = function (id,idName='id'){
 }
 
 /**
- * 去除数组中重复项,返回新的无重复的数组
- * @param array 原数组
+ * 去除数组中重复项,返回新的无重复的数组。将数组与内元素一个个取出与后面的元素作比较，如果重复从数组中移除
  */
-Array.prototype.removeRepeatItem = function (array){
-    let newArr = []//一个新的临时数组
-    //遍历当前数组
-    for(let i = 0; i < array.length; i++){
-        //如果当前数组的第i已经保存进了临时数组，那么跳过，
-        //否则把当前项push到临时数组里面
-        if (newArr.indexOf(array[i]) < 0) newArr.push(array[i])
+Array.prototype.removeRepeatItem = function (){
+    for(let i = 0; i < this.length-1; i++){
+        for(let j=1;j<this.length-i;j++){
+            if(this[i]===this[i+j]){
+                this.splice(i+j,1)
+            }
+        }
     }
-    return newArr
+    return this
 }
