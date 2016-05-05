@@ -112,10 +112,11 @@ Array.prototype.takeById = function (id,idName='id'){
  * 去除数组中重复项,返回新的无重复的数组。将数组与内元素一个个取出与后面的元素作比较，如果重复从数组中移除
  */
 Array.prototype.removeRepeatItem = function (){
-    for(let i = 0; i < this.length-1; i++){
+    for(let i = 0; i < this.length; i++){
         for(let j=1;j<this.length-i;j++){
-            if(this[i]===this[i+j]){
+            if(this[i]==this[i+j]){
                 this.splice(i+j,1)
+                j--
             }
         }
     }
