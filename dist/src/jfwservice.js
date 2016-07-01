@@ -7,6 +7,12 @@ exports.default = service;
 
 require('./jquery');
 
+var _promise = require('promise');
+
+var _promise2 = _interopRequireDefault(_promise);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var $ = window.$;
 var JfwServer = {
     service: function service(serviceId, method, param, callback, failCallback) {
@@ -61,7 +67,7 @@ function service(serviceId, method, param) {
         url += "&method=" + method;
         return fetchService(url, param);
     } else {
-        return new Promise(function (resolve, reject) {
+        return new _promise2.default(function (resolve, reject) {
             return JfwServer.service(serviceId, method, param, resolve, reject);
         });
     }

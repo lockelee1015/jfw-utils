@@ -1,5 +1,6 @@
 'use strict';
 import './jquery'
+import Promise from 'promise'
 const $ = window.$
 const JfwServer = {
     service: function (serviceId, method, param, callback, failCallback) {

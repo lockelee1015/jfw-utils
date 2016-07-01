@@ -35,13 +35,22 @@ Array.prototype.sortById = function (order = 'asc', idName = 'id') {
         function sort(a, b) {
             var sortResult
             if (typeof a[sortBy] == 'string') {
-                sortResult = a[sortBy].localeCompare(b[sortBy])
+                if (!!a[sortBy]) {
+                    sortResult = a[sortBy].localeCompare(b[sortBy])
+                } else {
+                    sortResult = -1
+                }
+
                 if (sortResult === 0) {
                     if (_arg.length > 2) {
                         let i = 2
                         while (i < _arg.length) {
                             if (sortResult === 0) {
-                                sortResult = a[_arg[i]].localeCompare(b[_arg[i]])
+                                if (!!a[_arg[i]]) {
+                                    sortResult = a[_arg[i]].localeCompare(b[_arg[i]])
+                                } else {
+                                    sortResult = -1
+                                }
                             }
                             i++
                         }
