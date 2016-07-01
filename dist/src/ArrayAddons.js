@@ -38,19 +38,45 @@ Array.prototype.sortById = function () {
     var order = arguments.length <= 0 || arguments[0] === undefined ? 'asc' : arguments[0];
     var idName = arguments.length <= 1 || arguments[1] === undefined ? 'id' : arguments[1];
 
+    var _arg = arguments;
     var getSort = function getSort(order, sortBy) {
         var ordAlpha = order == 'asc' ? true : false;
-
         function sort(a, b) {
             var sortResult;
             if (typeof a[sortBy] == 'string') {
                 sortResult = a[sortBy].localeCompare(b[sortBy]);
+                if (sortResult === 0) {
+                    if (_arg.length > 2) {
+                        var i = 2;
+                        while (i < _arg.length) {
+                            if (sortResult === 0) {
+                                sortResult = a[_arg[i]].localeCompare(b[_arg[i]]);
+                            }
+                            i++;
+                        }
+                    }
+                }
                 if (!ordAlpha && sortResult != 0) {
                     sortResult = -sortResult;
                 }
             } else if (typeof a[sortBy] == 'number') {
                 if (a[sortBy] === b[sortBy]) {
                     sortResult = 0;
+                    if (_arg.length > 2) {
+                        var _i = 2;
+                        while (_i < _arg.length) {
+                            if (sortResult === 0) {
+                                if (a[_arg[_i]] === b[_arg[_i]]) {
+                                    sortResult = 0;
+                                } else {
+                                    sortResult = a[_arg[_i]] > b[_arg[_i]];
+                                    if (!ordAlpha) sortResult = !sortResult;
+                                    sortResult = sortResult ? 1 : -1;
+                                }
+                            }
+                            _i++;
+                        }
+                    }
                 } else {
                     sortResult = a[sortBy] > b[sortBy];
                     if (!ordAlpha) sortResult = !sortResult;

@@ -29,24 +29,50 @@ Array.prototype.findById = function (id, idName = 'id') {
  * @param idName
  */
 Array.prototype.sortById = function (order = 'asc', idName = 'id') {
+    var _arg = arguments
     const getSort = function (order, sortBy) {
         var ordAlpha = (order == 'asc') ? true : false
-
         function sort(a, b) {
             var sortResult
             if (typeof a[sortBy] == 'string') {
                 sortResult = a[sortBy].localeCompare(b[sortBy])
-                if((!ordAlpha)&&sortResult!=0){
+                if (sortResult === 0) {
+                    if (_arg.length > 2) {
+                        let i = 2
+                        while (i < _arg.length) {
+                            if (sortResult === 0) {
+                                sortResult = a[_arg[i]].localeCompare(b[_arg[i]])
+                            }
+                            i++
+                        }
+                    }
+                }
+                if ((!ordAlpha) && sortResult != 0) {
                     sortResult = -sortResult
                 }
             } else if (typeof a[sortBy] == 'number') {
-                if(a[sortBy]===b[sortBy]){
-                    sortResult=0
-                }else{
+                if (a[sortBy] === b[sortBy]) {
+                    sortResult = 0
+                    if (_arg.length > 2) {
+                        let i = 2
+                        while (i < _arg.length) {
+                            if (sortResult === 0) {
+                                if (a[_arg[i]] === b[_arg[i]]) {
+                                    sortResult = 0
+                                } else {
+                                    sortResult = a[_arg[i]] > b[_arg[i]]
+                                    if (!ordAlpha) sortResult = !sortResult
+                                    sortResult = sortResult ? 1 : -1
+                                }
+                            }
+                            i++
+                        }
+                    }
+                } else {
                     sortResult = a[sortBy] > b[sortBy]
-                    if (!ordAlpha)sortResult = !sortResult
-                    sortResult = sortResult?1:-1
-                }   
+                    if (!ordAlpha) sortResult = !sortResult
+                    sortResult = sortResult ? 1 : -1
+                }
             }
             return sortResult
         }
@@ -102,8 +128,8 @@ Array.prototype.updateById = function (item, idName = 'id') {
  * @param id
  * @param idName
  */
-Array.prototype.takeById = function (id,idName='id'){
-    const item = this.findById(id,idName)
-    this.removeById(id,idName)
+Array.prototype.takeById = function (id, idName = 'id') {
+    const item = this.findById(id, idName)
+    this.removeById(id, idName)
     return item
 }
