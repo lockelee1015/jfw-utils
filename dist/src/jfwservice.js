@@ -32,7 +32,8 @@ var ajaxService = function ajaxService(url, param, callback, failCallback) {
         dataType: 'json',
         data: { data: _param }
     }).done(function (e) {
-        return callback(e);
+        handleException(e);
+        callback(e);
     }).fail(function (e) {
         console.log('数据获取失败:' + url);
         failCallback ? failCallback(e) : void 0;
@@ -49,8 +50,34 @@ var fetchService = function fetchService(url, param) {
         },
         body: _param
     }).then(function (e) {
-        return e.json();
+        return handleException(e.json());
     });
+};
+
+var handleException = function handleException(e) {
+    if (window._jfwExceptionHandler && e.status === '-1') {
+        window._jfwExceptionHandler(e);
+    }
+    return e;
+};
+
+/**
+ * 返回结果为{code:'JFW0000',message:'异常信息',cause:'原因',detail:'具体异常信息'}
+ */
+var parseExceptionTips = function parseExceptionTips(e) {
+    var result = {};
+    result.detail = e.tips;
+    var excptionArr = result.detail.split('\n');
+    var jfwMsgArr = excptionArr[0].split(':')[1].split('~');
+    result.code = jfwMsgArr[0];
+    result.message = jfwMsgArr[1];
+    var causedArr = excptionArr.filter(function (str) {
+        return str.indexOf('Caused by:') > -1;
+    });
+    if (causedArr.length > 0) {
+        result.cause = causedArr[0].split(':')[1];
+    }
+    return result;
 };
 
 /**
