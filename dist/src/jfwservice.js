@@ -56,7 +56,7 @@ var fetchService = function fetchService(url, param) {
 
 var handleException = function handleException(e) {
     if (window._jfwExceptionHandler && e.status === '-1') {
-        window._jfwExceptionHandler(e);
+        window._jfwExceptionHandler(parseExceptionTips(e));
     }
     return e;
 };

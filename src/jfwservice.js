@@ -46,7 +46,7 @@ const fetchService = function fetchService(url, param) {
 
 const handleException = function (e) {
     if (window._jfwExceptionHandler && e.status === '-1') {
-        window._jfwExceptionHandler(e)
+        window._jfwExceptionHandler(parseExceptionTips(e))
     }
     return e
 }
